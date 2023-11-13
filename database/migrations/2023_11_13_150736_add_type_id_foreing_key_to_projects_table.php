@@ -15,7 +15,7 @@ return new class extends Migration
             
             $table->unsignedBigInterger('type_id')->nullabe()->after('id');
             $table->forening('type_id')
-            ->references8('id')
+            ->references('id')
             ->on('types');
 
         });
