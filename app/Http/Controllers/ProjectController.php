@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Type;
 use App\Models\Project;
 //use App\Http\Requests\StoreProjectRequest;
 //use App\Http\Requests\UpdateProjectRequest;
 use Illuminate\Http\Request;
+//use Illuminate\Support\Facades\Storage;
+
 
 class ProjectController extends Controller
 {
@@ -19,7 +22,8 @@ class ProjectController extends Controller
     /* Show the form for creating a new resource. */
     public function create()
     {
-        return view('admin.projects.create');
+        $types = Type::all();
+        return view('admin.projects.create', compact('types'));
     }
 
     /* Store a newly created resource in storage. */
