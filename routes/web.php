@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
+use App\Models\Project;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,6 +25,7 @@ Route::get('/dashboard', function () {     //autenticare il percorso del link ne
     return view('admin.dashboard');
 });
 
+Route::get('/destroy', [ProjectController::class, 'destroy'])->name('project.destroy');
 
 
 Route::get('/admin', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');

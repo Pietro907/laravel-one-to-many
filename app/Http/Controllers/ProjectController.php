@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 
 class ProjectController extends Controller
 {
+
     /*  Display a listing of the resource.*/
     public function index()
     {
@@ -22,6 +23,13 @@ class ProjectController extends Controller
     /* Show the form for creating a new resource. */
     public function create()
     {
+        $project = Project::onlyTrashed()->where('id');
+        if ($project) {
+           $project->restore();
+           return $project;
+        }
+
+
         $types = Type::all();
         return view('admin.projects.create', compact('types'));
     }
@@ -38,6 +46,7 @@ class ProjectController extends Controller
         $project->tech = $request->tech;
         $project->link = $request->link;
         $project->github_link = $request->github_link;
+        $project->type_id = $request->type_id;
         $project->save();
         return to_route('project.index');
     }
@@ -73,6 +82,6 @@ class ProjectController extends Controller
     public function destroy(Project $project)
     {
         $project->delete();
-        return redirect()->route('project.index')/* ->with('hai cancellato il il fumetto con successo!') */;
+        return redirect()->route('project.index')->with('messaggio', 'hai cancellato il progetto con successo!');
     }
 }
