@@ -24,10 +24,10 @@ class ProjectController extends Controller
     public function create()
     {
         $project = Project::onlyTrashed()->where('id');
-        if ($project) {
+        /* if ($project) {
            $project->restore();
            return $project;
-        }
+        } */
 
 
         $types = Type::all();
@@ -60,7 +60,8 @@ class ProjectController extends Controller
     /* Show the form for editing the specified resource. */
     public function edit(Project $project)
     {
-        return view('admin.projects.edit', compact('project'));
+        $types = Type::all();
+        return view('admin.projects.edit', compact('project', 'types'));
     }
 
     /* Update the specified resource in storage. */
